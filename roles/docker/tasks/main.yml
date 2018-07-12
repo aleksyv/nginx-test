@@ -1,0 +1,17 @@
+-   name: Install Docker and PIP
+    yum: pkg={{ item }} state=latest
+    with_items:
+    - docker
+    - python-pip
+    become: yes
+    tags: docker 
+
+-   name: Install Docker-py
+    become: yes
+    pip: name=docker-py
+    tags: docker
+
+-   name: Make sure Docker is running
+    become: yes
+    service: name=docker state=started
+    tags: docker

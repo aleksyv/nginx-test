@@ -1,0 +1,39 @@
+- name: Create nginx folder for image
+  file: path=/home/nginx state=directory mode=0777
+  become: yes
+
+- name: Copy Docker file
+  copy:
+    src: site/Dockerfile
+    dest: /home/nginx/Dockerfile
+
+- name:	Copy nginx.conf file 
+  copy:
+    src: site/nginx.conf
+    dest: /home/nginx/nginx.conf
+
+- name:	Copy htpasswd file 
+  copy:
+    src: site/htpasswd
+    dest: /home/nginx/htpasswd
+
+- name:	Copy index.html file 
+  copy:
+    src: site/index.html
+    dest: /home/nginx/index.html 
+
+- name: Build an image
+  docker_image:
+    path: /home/nginx
+    name: nginx-test
+    dockerfile: /home/nginx/Dockerfile
+    state: present
+  become: yes
+
+- name: Start container
+  docker:
+    name: nginx-test
+    image: nginx-test
+    state: started
+    ports: 80:80
+  become: yes
