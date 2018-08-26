@@ -6,7 +6,7 @@ EC2 instance created and accessible from ansible host via ssh
 How to use:
 specify host and connection in /etc/ansible/hosts
 run playbok as
-ansible-playbook test-nginx.yml
+    ansible-playbook test-nginx.yml
 
 Notes:
 It was required to use lightweight image and Alpine was used
@@ -26,17 +26,17 @@ htpasswd - basic nginx authentication ( user / haufe)
 
 My example:
 
-[root@ip-172-31-38-170 nginx]# docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
-aad0770785df        nginx-test          "nginx -g 'daemon of…"   24 minutes ago      Up 24 minutes       0.0.0.0:80->80/tcp   nginx-test
-[root@ip-172-31-38-170 nginx]# curl -u user:haufe http://127.0.0.1/
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>test review</title>
-  </head>
-  <body>
-    <h1>Hello World</h1>
-  </body>
-</html>
+    [root@ip-172-31-38-170 nginx]# docker ps
+    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+    aad0770785df        nginx-test          "nginx -g 'daemon of…"   24 minutes ago      Up 24 minutes       0.0.0.0:80->80/tcp   nginx-test
+    [root@ip-172-31-38-170 nginx]# curl -u user:haufe http://127.0.0.1/
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>test review</title>
+      </head>
+      <body>
+        <h1>Hello World</h1>
+      </body>
+    </html>
