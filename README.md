@@ -1,27 +1,32 @@
-Test answer 
-
-Assumption:
-EC2 instance created and accessible from ansible host via ssh
+Test answer updated
 
 How to use:
-specify host and connection in /etc/ansible/hosts
+specify AWS details in **roles/ec2_instance/defaults/main.yml**
+
 run playbok as
-    ansible-playbook test-nginx.yml
+    ansible-playbook aws.yml
 
 Notes:
 It was required to use lightweight image and Alpine was used
 https://hub.docker.com/_/alpine/
 
-The ansible script consists of 2 roles:
-docker - installing docker on EC2
-nginx - building image with nginx and started container
+Using local key ~/.ssh/id_rsa.pub it should be changed if you have other one
 
-site folder contains:
+The ansible script consists of 3 roles:
 
-Dockerfile - for image/container
-index.html - "Hello world" page
-nginx.conf - nginx configuration
-htpasswd - basic nginx authentication ( user / haufe)
+**ec2-instance** - created EC2 instance
+
+AWS connection and key details in roles/ec2_instance/defaults/main.yml
+
+**docker** - installing docker on EC2 created instance
+
+**nginx** - building image with nginx and started container
+
+**site** folder contains:
+* Dockerfile - for image/container
+* index.html - "Hello world" page
+* nginx.conf - nginx configuration
+* htpasswd - basic nginx authentication ( user / haufe)
 
 
 My example:
@@ -40,3 +45,4 @@ My example:
         <h1>Hello World</h1>
       </body>
     </html>
+
