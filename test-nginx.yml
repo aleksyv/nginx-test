@@ -1,5 +1,0 @@
----
-- hosts: awstest
-  roles:
-    - docker
-    - nginx
