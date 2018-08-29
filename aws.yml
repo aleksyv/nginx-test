@@ -14,5 +14,6 @@
 
   roles:
     - docker
+    - ssl
     - nginx
 

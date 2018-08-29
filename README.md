@@ -12,13 +12,15 @@ https://hub.docker.com/_/alpine/
 
 Using local key ~/.ssh/id_rsa.pub it should be changed if you have other one
 
-The ansible script consists of 3 roles:
+The ansible script consists of 4 roles:
 
 **ec2-instance** - created EC2 instance
 
 AWS connection and key details in roles/ec2_instance/defaults/main.yml
 
 **docker** - installing docker on EC2 created instance
+
+**ssl** - generate self signed cert for haufe.test domain name
 
 **nginx** - building image with nginx and started container
 
@@ -31,10 +33,16 @@ AWS connection and key details in roles/ec2_instance/defaults/main.yml
 
 My example:
 
-    [root@ip-172-31-38-170 nginx]# docker ps
-    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
-    aad0770785df        nginx-test          "nginx -g 'daemon of…"   24 minutes ago      Up 24 minutes       0.0.0.0:80->80/tcp   nginx-test
-    [root@ip-172-31-38-170 nginx]# curl -u user:haufe http://127.0.0.1/
+[root@ip-172-31-32-121 ec2-user]# docker ps
+    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+    84be0be5eac4        nginx-test          "nginx -g 'daemon of…"   2 minutes ago       Up 2 minutes        0.0.0.0:443->443/tcp   nginx-test
+
+    ansible-playbook aws.yml
+    PLAY RECAP ************************************************************************************************
+    XX.197.46.164              : ok=14   changed=13   unreachable=0    failed=0   
+    localhost                  : ok=7    changed=4    unreachable=0    failed=0   
+
+    curl -u user:haufe -k https://18.197.46.164
     <!DOCTYPE html>
     <html lang="en">
       <head>
@@ -44,5 +52,4 @@ My example:
       <body>
         <h1>Hello World</h1>
       </body>
-    </html>
-
+    </html>   

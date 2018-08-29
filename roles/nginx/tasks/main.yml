@@ -35,5 +35,5 @@
     name: nginx-test
     image: nginx-test
     state: started
-    ports: 80:80
+    ports: 443:443
   become: yes

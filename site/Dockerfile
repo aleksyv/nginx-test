@@ -9,5 +9,9 @@ RUN mkdir -p /var/www/site
 COPY index.html /var/www/site/index.html
 COPY htpasswd /var/www/site/.htpasswd
 
-EXPOSE 80
+RUN mkdir -p /var/ssl
+COPY ssl/cert.pem /var/ssl/cert.pem
+COPY ssl/key.pem /var/ssl/key.pem
+
+EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]

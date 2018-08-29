@@ -1,6 +1,6 @@
 ---
-aws_access_key: "AKIAIF2U6SCCHTZEWFAQ"
-aws_secret_key: "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"
+aws_access_key: ""
+aws_secret_key: ""
 keypair: "alex_test"
 instance_type: "t2.micro"
 image: "ami-0f5dbc86dd9cbf7a8"

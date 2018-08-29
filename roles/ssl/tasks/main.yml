@@ -1,0 +1,28 @@
+- name: Create SSL folder
+  file: path=/home/nginx/ssl state=directory mode=0777
+  become: yes
+
+- name: Generate RSA Key
+  command: openssl genrsa \
+    -out "/home/nginx/ssl/key.pem" 2048
+  args:
+    creates: "/home/nginx/ssl/key.pem"
+
+- name: Generate CSR
+  command: openssl req \
+    -new \
+    -subj '/C=US/ST=CA/L=Mountain View/O=Haufe/CN=haufe.test'
+    -key "/home/nginx/ssl/key.pem" \
+    -out "/home/nginx/ssl/csr.pem"
+  args:
+    creates: "/home/nginx/ssl/csr.pem"
+
+- name: Generate Self-Signed Certificate
+  command: openssl req \
+    -x509 \
+    -days 1825 \
+    -key "/home/nginx/ssl/key.pem" \
+    -in "/home/nginx/ssl/csr.pem" \
+    -out "/home/nginx/ssl/cert.pem"
+  args:
+    creates: "/home/nginx/ssl/cert.pem"
