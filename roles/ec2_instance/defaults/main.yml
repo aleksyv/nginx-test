@@ -1,0 +1,10 @@
+---
+aws_access_key: "AKIAIF2U6SCCHTZEWFAQ"
+aws_secret_key: "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"
+keypair: "alex_test"
+instance_type: "t2.micro"
+image: "ami-0f5dbc86dd9cbf7a8"
+group: "nginx-test"
+region: "eu-central-1"
+ssh_localhost_public_key_file_path: "~/.ssh/id_rsa.pub"
+ssh_localhost_public_key: "{{ lookup('file', '' + ssh_localhost_public_key_file_path) }}"
